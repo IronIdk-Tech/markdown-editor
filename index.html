@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Minimalist Markdown Editor</title>
+    <link rel="stylesheet" href="styles.css">
+    <!-- Highlight.js for syntax highlighting -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.0/styles/github.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.0/highlight.min.js"></script>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  </head>
+  <body>
+    <div class="app-container">
+      <header>
+        <h1>Minimalist Markdown Editor</h1>
+      </header>
+      
+      <!-- Toolbar -->
+      <div class="toolbar">
+        <div class="toolbar-group">
+          <button class="tool-btn" onclick="insertText('# ')" title="Heading 1">H1</button>
+          <button class="tool-btn" onclick="insertText('## ')" title="Heading 2">H2</button>
+          <button class="tool-btn" onclick="insertText('### ')" title="Heading 3">H3</button>
+        </div>
+        
+        <div class="toolbar-group">
+          <button class="tool-btn" onclick="insertText('**')" title="Bold">B</button>
+          <button class="tool-btn" onclick="insertText('*')" title="Italic">I</button>
+          <button class="tool-btn" onclick="insertText('~~')" title="Strikethrough">S</button>
+        </div>
+        
+        <div class="toolbar-group">
+          <button class="tool-btn" onclick="insertText('`')" title="Inline Code">Code</button>
+          <button class="tool-btn" onclick="insertText('```\n\n```')" title="Code Block">Block</button>
+        </div>
+        
+        <div class="toolbar-group">
+          <button class="tool-btn" onclick="insertText('- ')" title="Bullet List">• List</button>
+          <button class="tool-btn" onclick="insertText('1. ')" title="Numbered List">1. List</button>
+          <button class="tool-btn" onclick="insertText('> ')" title="Blockquote">Quote</button>
+        </div>
+        
+        <div class="toolbar-group">
+          <button class="tool-btn" onclick="insertText('[]()')" title="Link">Link</button>
+          <button class="tool-btn" onclick="insertText('![]()')" title="Image">Image</button>
+        </div>
+        
+        <div class="toolbar-group file-actions">
+          <button class="tool-btn primary" onclick="saveToFile()" title="Save to File">Save</button>
+          <input type="file" accept=".md" onchange="loadFromFile(event)" id="file-input" style="display: none;">
+          <button class="tool-btn" onclick="document.getElementById('file-input').click()" title="Load from File">Load</button>
+          <button class="tool-btn theme-toggle" onclick="toggleDarkMode()" title="Toggle Dark Mode">
+            <span class="light-icon">☀️</span>
+            <span class="dark-icon">🌙</span>
+          </button>
+        </div>
+      </div>
+      
+      <!-- Editor and Preview Panes -->
+      <div class="container">
+        <div class="editor-container">
+          <div class="pane-label">Markdown</div>
+          <textarea id="editor" placeholder="Write your Markdown here..."></textarea>
+        </div>
+        <div class="preview-container">
+          <div class="pane-label">Preview</div>
+          <div id="preview"></div>
+        </div>
+      </div>
+      
+      <footer>
+        <div class="status-bar">
+          <span id="char-count">0 characters</span>
+          <span id="word-count">0 words</span>
+        </div>
+      </footer>
+    </div>
+    <script src="script.js"></script>
+  </body>
+</html>
+
