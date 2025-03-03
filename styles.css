@@ -137,6 +137,10 @@ h1 {
   background-color: var(--primary-hover);
 }
 
+.tool-btn i {
+  margin-right: 0.25rem;
+}
+
 .theme-toggle {
   width: 2.5rem;
 }
