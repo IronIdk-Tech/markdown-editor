@@ -176,3 +176,29 @@ document.addEventListener("keydown", (e) => {
   }
 })
 
+// Add event listener for keydown to handle Tab key and Backspace for untabbing
+editor.addEventListener("keydown", (e) => {
+  const start = editor.selectionStart;
+  const end = editor.selectionEnd;
+
+  if (e.key === "Tab") {
+    e.preventDefault(); // Prevent the default tab behavior
+    // Insert two spaces
+    editor.value = editor.value.substring(0, start) + "  " + editor.value.substring(end);
+    editor.selectionStart = editor.selectionEnd = start + 2; // Move the cursor after the spaces
+    // Trigger input event to update preview
+    const event = new Event("input", { bubbles: true });
+    editor.dispatchEvent(event);
+  } else if (e.key === "Backspace") {
+    // Check if the last two characters are spaces
+    if (editor.value.substring(start - 2, start) === "  ") {
+      e.preventDefault(); // Prevent the default backspace behavior
+      // Remove the last two spaces
+      editor.value = editor.value.substring(0, start - 2) + editor.value.substring(end);
+      editor.selectionStart = editor.selectionEnd = start - 2; // Move the cursor back
+      // Trigger input event to update preview
+      const event = new Event("input", { bubbles: true });
+      editor.dispatchEvent(event);
+    }
+  }
+});
